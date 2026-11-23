@@ -48,7 +48,7 @@ figure, h1, h2, h3, p, ul, ol, dl, dd { margin: 0; }
   background: var(--ink);
   border-bottom: 1px solid var(--line);
 }
-.wordmark { font-weight: 900; white-space: nowrap; }
+.wordmark img { filter: brightness(0) invert(1); }
 .site-header nav { display: flex; gap: clamp(.75rem, 2.2vw, 2.25rem); }
 .site-header a[aria-current="location"] { color: var(--accent); }
 .menu-toggle {

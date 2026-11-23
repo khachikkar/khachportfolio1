@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Selected design project by Khachik Karapetyan, graphic designer in Yerevan, Armenia.">
+  <title>Selected Project — Khachik Karapetyan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <script src="project.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#project-main">Skip to project</a>
+  <header class="site-header">
+    <a class="wordmark" href="index.html#top" aria-label="Khachik Karapetyan, home"><img src="assets/my-logo.svg" alt="" width="265" height="72"></a>
+    <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>Menu</button>
+    <nav id="site-nav" aria-label="Main navigation">
+      <a href="index.html#work">Work</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#expertise">Expertise</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="project-main">
+    <section class="section light project-hero" aria-labelledby="project-title">
+      <a class="project-back" href="index.html#work">← Selected work</a>
+      <p class="meta project-category" id="project-category">Concept project</p>
+      <h1 id="project-title">Selected project</h1>
+      <p class="project-lede" id="project-description"></p>
+      <figure class="project-feature">
+        <img id="project-image" src="assets/identity.avif" alt="" fetchpriority="high">
+        <figcaption class="meta" id="project-caption"></figcaption>
+      </figure>
+    </section>
+
+    <section class="section project-overview" aria-labelledby="overview-title">
+      <p class="meta">Project / Concept</p>
+      <div class="overview-content">
+        <h2 id="overview-title">The idea.</h2>
+        <p class="project-overview-copy" id="project-overview-copy"></p>
+        <ul class="project-scope" id="project-scope" aria-label="Project focus"></ul>
+      </div>
+    </section>
+
+    <section class="section light project-pagination" aria-label="More projects">
+      <p class="meta">More selected work</p>
+      <a class="next-project" id="next-project" href="index.html#work">
+        <span class="meta">Next project →</span>
+        <strong>Back to selected work</strong>
+      </a>
+      <a class="project-back" href="index.html#work">← All projects</a>
+    </section>
+  </main>
+
+  <footer class="site-footer meta">
+    <span>© Khachik Karapetyan / Yerevan</span>
+    <a href="index.html#top">Back to top ↑</a>
+  </footer>
+</body>
+</html>

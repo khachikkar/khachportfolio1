@@ -21,8 +21,10 @@ navigation.addEventListener('click', (event) => {
   if (link && mobileLayout.matches) {
     setMenu(false);
     const section = document.querySelector(link.hash);
-    section.tabIndex = -1;
-    section.focus({ preventScroll: true });
+    if (section) {
+      section.tabIndex = -1;
+      section.focus({ preventScroll: true });
+    }
   }
 });
 
@@ -34,6 +36,20 @@ document.addEventListener('keydown', (event) => {
 });
 
 const navigationLinks = [...navigation.querySelectorAll('a')];
+const siteHeader = document.querySelector('.site-header');
+const pageSections = [...document.querySelectorAll('main > section')];
+
+function syncHeaderAppearance() {
+  const scrolled = window.scrollY > 12;
+  siteHeader.classList.toggle('is-scrolled', scrolled);
+
+  const marker = siteHeader.getBoundingClientRect().bottom + 2;
+  const sectionUnderHeader = pageSections.find((section) => {
+    const bounds = section.getBoundingClientRect();
+    return bounds.top <= marker && bounds.bottom > marker;
+  });
+  siteHeader.classList.toggle('is-over-light', scrolled && Boolean(sectionUnderHeader?.classList.contains('light')));
+}
 
 function syncCurrentLink() {
   for (const link of navigationLinks) {
@@ -47,8 +63,11 @@ function syncCurrentLink() {
 
 mobileLayout.addEventListener('change', syncLayout);
 window.addEventListener('hashchange', syncCurrentLink);
+window.addEventListener('scroll', syncHeaderAppearance, { passive: true });
+window.addEventListener('resize', syncHeaderAppearance);
 syncLayout();
 syncCurrentLink();
+syncHeaderAppearance();
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 

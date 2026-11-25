@@ -1,13 +1,5 @@
 async function loadProjectPage() {
-  let projects;
-  try {
-    const response = await fetch('projects.json');
-    if (!response.ok) throw new Error('Could not load projects.');
-    const data = await response.json();
-    projects = Array.isArray(data) ? data : data.projects;
-  } catch {
-    projects = window.PORTFOLIO_PROJECTS_FALLBACK;
-  }
+  const { projects } = await window.PortfolioData.load();
   if (!Array.isArray(projects)) throw new Error('Project data is missing.');
   const requestedSlug = new URLSearchParams(window.location.search).get('slug');
   const projectIndex = projects.findIndex((item) => item.slug === requestedSlug);

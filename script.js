@@ -71,18 +71,8 @@ syncHeaderAppearance();
 
 const projectGrid = document.querySelector('#project-grid');
 if (projectGrid) {
-  fetch('projects.json')
-    .then((response) => {
-      if (!response.ok) throw new Error('Could not load projects.');
-      return response.json();
-    })
-    .catch(() => ({
-      hero: window.PORTFOLIO_HERO_FALLBACK,
-      projects: window.PORTFOLIO_PROJECTS_FALLBACK
-    }))
-    .then((portfolio) => {
-      const projects = Array.isArray(portfolio) ? portfolio : portfolio.projects;
-      const hero = Array.isArray(portfolio) ? window.PORTFOLIO_HERO_FALLBACK : portfolio.hero;
+  window.PortfolioData.load()
+    .then(({ hero, projects }) => {
       if (!Array.isArray(projects)) throw new Error('Project data is missing.');
       const heroImage = document.querySelector('#hero-image');
       if (heroImage && hero?.image) {

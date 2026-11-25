@@ -1,26 +1,26 @@
 # Khachik Karapetyan Portfolio
 
-The portfolio is a static site hosted on Netlify. `projects.json` contains the homepage hero image and the project list.
+The static portfolio uses Supabase for its shared hero, project content, admin sign-in, and uploaded images. `projects.json` remains the starter and downloadable backup.
 
-## Edit the hero or projects
+## Supabase setup
 
-1. Open `/admin.html`; the current hero and projects load automatically.
-2. Upload a new homepage hero image, edit a project, or add/delete projects.
-3. Click **Download updated portfolio JSON**.
-4. Replace `projects.json` in the portfolio folder with the downloaded file, then publish the site.
+The Supabase project `khachik-portfolio` is connected in `supabase-config.js`. Its URL and **publishable** key are safe for browser code; never put a service role key in the site. The `supabase/portfolio_setup.sql` migration creates the RLS-protected content row, image bucket, policies, and starter data.
 
-Uploaded images are embedded in the JSON file. AVIF, JPG, PNG, and WebP are supported; compressed AVIF images help keep the website fast. Password protection and online saving can be added with Supabase in a later phase.
+In Supabase Auth → URL Configuration, set the Site URL to `https://khachportfolio1.netlify.app` and add `https://khachportfolio1.netlify.app/admin.html` plus your local development address (for example, `http://localhost:*/**`) to the allowed redirect URLs. On `/admin.html`, create an account with `khachikkarapetyan78@gmail.com`, confirm the email, then sign in with its password. The database and Storage policies allow writes only for that email.
 
-## Project fields
+## Edit projects
 
-- `hero.image` and `hero.alt` control the homepage portrait.
-- Each entry in `projects` has `slug`, `title`, `category`, `description`, `image`, `alt`, and `focus` fields.
+1. Sign in to `/admin.html`.
+2. Edit a project, add or delete one, or choose a new hero/project image.
+3. Click **Save changes online**. The database update is shared by all visitors; the image files are stored in the public portfolio image bucket.
+
+The JSON backup button downloads the current content if needed. `projects.json` and the in-browser store remain fallbacks when Supabase is not configured or reachable.
 
 ## Main files
 
-- `index.html` and `style.css` define the portfolio structure and visual design.
-- `script.js` renders the Work cards and hero image, and handles page motion.
-- `projects.json` is the shared hero and project data.
-- `projects-fallback.js` keeps the starter data visible in previews where browsers block JSON fetch requests.
-- `project.html` and `project.js` render individual projects.
-- `admin.html` and `admin.js` provide the JSON editor.
+- `index.html`, `project.html`, and `style.css` define the public portfolio.
+- `projects.json` contains initial and backup content.
+- `portfolio-store.js` reads current content from Supabase with local/JSON fallbacks.
+- `supabase-config.js` contains the browser-safe project URL and publishable key.
+- `supabase/portfolio_setup.sql` creates the content table, public image bucket, initial row, and RLS policies.
+- `admin.html` and `admin.js` provide authenticated editing.

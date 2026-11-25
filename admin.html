@@ -20,6 +20,7 @@
     .admin-panel { padding: 28px 0; }
     .admin-panel[hidden] { display: none; }
     .admin-form { display: grid; gap: 16px; max-width: 680px; }
+    .admin-auth { max-width: 460px; }
     .admin-form label { display: grid; gap: 7px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
     .admin-form input, .admin-form textarea { width: 100%; padding: 13px 14px; border: 1px solid #aaa; border-radius: 0; background: white; color: #111; font: 16px/1.4 Montserrat, sans-serif; text-transform: none; letter-spacing: normal; }
     .admin-form textarea { min-height: 90px; resize: vertical; }
@@ -44,27 +45,41 @@
   <main class="admin-wrap">
     <header class="admin-top">
       <h1>Work editor</h1>
-      <a href="index.html#work">View portfolio ↗</a>
+      <div class="admin-actions" style="align-items:center">
+        <a href="index.html#work">View portfolio ↗</a>
+        <button class="admin-button secondary" id="logout-button" type="button" hidden>Log out</button>
+      </div>
     </header>
     <p class="admin-status" id="admin-status" role="status" aria-live="polite"></p>
-    <section class="admin-panel" aria-labelledby="hero-editor-title">
-      <h2 id="hero-editor-title">Homepage hero image</h2>
-      <p class="admin-note">This is the large portrait at the top of your homepage.</p>
-      <img id="hero-image-preview" alt="Current homepage hero image preview" style="display:block;width:min(100%,560px);max-height:260px;margin:16px 0;object-fit:cover;object-position:center 39%;background:#e5e5e3">
-      <div class="admin-form">
-        <label>Choose a new hero image<input id="hero-image-file" type="file" accept="image/avif,image/jpeg,image/png,image/webp,.avif,.jpg,.jpeg,.png,.webp"></label>
-        <label>Image description<input id="hero-image-alt" maxlength="240"></label>
-      </div>
+    <section class="admin-panel" id="login-panel" aria-labelledby="login-title">
+      <h2 id="login-title">Sign in to manage your portfolio</h2>
+      <p class="admin-note">Use your portfolio email: <strong>khachikkarapetyan78@gmail.com</strong></p>
+      <form class="admin-form admin-auth" id="auth-form">
+        <label>Password<input id="admin-password" type="password" autocomplete="current-password" required minlength="8"></label>
+        <div class="admin-actions">
+          <button class="admin-button" id="login-button" type="submit">Sign in</button>
+          <button class="admin-button secondary" id="signup-button" type="button">Create account</button>
+        </div>
+      </form>
     </section>
-    <section class="admin-panel" aria-labelledby="projects-title">
+    <div id="editor-panel" hidden>
+      <section class="admin-panel" aria-labelledby="hero-editor-title">
+        <h2 id="hero-editor-title">Homepage hero image</h2>
+        <p class="admin-note">This is the large portrait at the top of your homepage.</p>
+        <img id="hero-image-preview" alt="Current homepage hero image preview" style="display:block;width:min(100%,560px);max-height:260px;margin:16px 0;object-fit:cover;object-position:center 39%;background:#e5e5e3">
+        <div class="admin-form">
+          <label>Choose a new hero image<input id="hero-image-file" type="file" accept="image/avif,image/jpeg,image/png,image/webp,.avif,.jpg,.jpeg,.png,.webp"></label>
+          <label>Image description<input id="hero-image-alt" maxlength="240"></label>
+        </div>
+      </section>
+      <section class="admin-panel" aria-labelledby="projects-title">
       <h2 id="projects-title">Your projects</h2>
       <ol class="admin-steps">
         <li>Choose a project below to edit, or add a new one.</li>
         <li>Upload or change its image from your computer.</li>
-        <li>Click <strong>Download updated portfolio JSON</strong>.</li>
-        <li>Replace <code>projects.json</code> in your portfolio folder with that file, then publish the site.</li>
+        <li>Click <strong>Save changes online</strong> to publish them for everyone.</li>
       </ol>
-      <p class="admin-note">The project list and hero image settings load automatically. Uploaded images are included in the downloaded JSON file. Compressed AVIF images are best for keeping the website fast.</p>
+      <p class="admin-note">Your changes save to Supabase, so they appear on the public site after saving. AVIF, JPG, PNG, and WebP images are supported.</p>
       <ul class="admin-list" id="project-list"></ul>
       <h2 id="form-title">Add a project</h2>
       <form class="admin-form" id="project-form">
@@ -84,11 +99,17 @@
         </div>
       </form>
       <div class="admin-actions" style="margin-top:32px">
-        <button class="admin-button" id="save-json" type="button">Download updated portfolio JSON</button>
+        <button class="admin-button" id="save-online" type="button">Save changes online</button>
+        <button class="admin-button secondary" id="download-backup" type="button">Download JSON backup</button>
       </div>
-    </section>
+      </section>
+    </div>
   </main>
   <script src="projects-fallback.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2" defer></script>
+  <script src="supabase-config.js" defer></script>
+  <script src="supabase-client.js" defer></script>
+  <script src="portfolio-store.js" defer></script>
   <script src="admin.js" defer></script>
 </body>
 </html>

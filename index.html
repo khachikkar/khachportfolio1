@@ -7,8 +7,10 @@
   <title>Khachik Karapetyan — Graphic Designer & Digital Creative</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <script src="projects-fallback.js" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body>
@@ -27,8 +29,8 @@
   <main>
     <section id="top" class="hero light" aria-labelledby="hero-title">
       <figure class="hero-photo">
-        <img src="assets/portrait.avif" alt="Black-and-white stock portrait">
-        <figcaption>Stock portrait</figcaption>
+        <img id="hero-image" src="assets/hero-portrait.png" alt="Khachik Karapetyan shown half as a blue sketch and half as a photograph">
+        <figcaption>Khachik Karapetyan</figcaption>
       </figure>
       <div class="hero-copy">
         <div class="hero-details meta">
@@ -52,40 +54,7 @@
       <p class="meta">( 02 ) Selected work</p>
       <h2 class="work-title">Work<span>*</span></h2>
       <p class="meta work-note">* Placeholder concepts with stock imagery.</p>
-      <div class="project-grid">
-        <article>
-          <a class="project-card" href="project.html?slug=identity-system">
-            <img src="assets/identity.avif" alt="Design swatches and tools" loading="lazy">
-            <p class="meta">01 / Branding</p>
-            <h3>Identity system concept</h3>
-            <p>A modular logo, type and color system for a cultural brand.</p>
-          </a>
-        </article>
-        <article>
-          <a class="project-card" href="project.html?slug=launch-campaign">
-            <img src="assets/campaign.avif" alt="Team reviewing campaign work" loading="lazy">
-            <p class="meta">02 / Digital campaigns</p>
-            <h3>Launch campaign concept</h3>
-            <p>A social-first campaign toolkit across formats.</p>
-          </a>
-        </article>
-        <article>
-          <a class="project-card" href="project.html?slug=editorial-shoot">
-            <img src="assets/editorial.avif" alt="Editorial design materials" loading="lazy">
-            <p class="meta">03 / Art direction</p>
-            <h3>Editorial shoot concept</h3>
-            <p>Moodboard, styling and layout direction for print.</p>
-          </a>
-        </article>
-        <article>
-          <a class="project-card" href="project.html?slug=product-interface">
-            <img src="assets/product.avif" alt="Interface sketches and wireframes" loading="lazy">
-            <p class="meta">04 / UI/UX</p>
-            <h3>Product interface concept</h3>
-            <p>A clean interface language for a mobile product.</p>
-          </a>
-        </article>
-      </div>
+      <div class="project-grid" id="project-grid" aria-live="polite"></div>
     </section>
 
     <section id="expertise" class="section" aria-labelledby="expertise-title">
@@ -104,14 +73,14 @@
       <div class="about-details">
         <p class="body-copy">Based in Yerevan, Armenia. I've worked with product and creative teams at Picsart and Wirestock, and I currently work in graphic design at emater, alongside freelance projects.</p>
         <dl class="experience">
-          <div><dt>emater</dt><dd>Graphic design / Current</dd></div>
-          <div><dt>Picsart</dt><dd>Design experience</dd></div>
-          <div><dt>Wirestock</dt><dd>Design experience</dd></div>
+          <div><dt><a class="experience-link emater-link" href="https://www.instagram.com/emater.io/" target="_blank" rel="noopener noreferrer">emater</a></dt><dd>Graphic design / Current</dd></div>
+          <div><dt><a class="experience-link picsart-link" href="https://picsart.com/" target="_blank" rel="noopener noreferrer">Picsart</a></dt><dd>Design experience</dd></div>
+          <div><dt><a class="experience-link wirestock-link" href="https://wirestock.io/" target="_blank" rel="noopener noreferrer">Wirestock</a></dt><dd>Design experience</dd></div>
           <div><dt>Freelance</dt><dd>Independent projects</dd></div>
         </dl>
         <p class="meta tools-label">Tools</p>
         <ul class="tool-list" aria-label="Design tools">
-          <li>Figma</li><li>Adobe Illustrator</li><li>Adobe Photoshop</li>
+          <li>Figma</li><li>Adobe Illustrator</li><li>Adobe Photoshop</li><li>ChatGPT</li><li>Claude</li><li>Microsoft Office</li><li>Canva</li>
         </ul>
       </div>
     </section>
@@ -120,8 +89,15 @@
       <p class="meta">( 05 ) Contact</p>
       <h2>Let’s make<br><em>something good.</em></h2>
       <div class="contact-info">
-        <div><p class="meta">Email (placeholder)</p><p class="email">hello@example.com</p></div>
-        <div><p class="meta">Social (placeholders)</p><ul><li>Behance</li><li>LinkedIn</li><li>Instagram</li><li>Dribbble</li></ul></div>
+        <div><p class="meta">Email</p><p class="email"><a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=khachikkarapetyan78%40gmail.com" target="_blank" rel="noopener noreferrer">khachikkarapetyan78@gmail.com</a></p></div>
+        <div>
+          <p class="meta">Social</p>
+          <ul>
+            <li><a href="https://www.behance.net/khachikkar31" target="_blank" rel="noopener noreferrer">Behance</a></li>
+            <li><a href="https://www.linkedin.com/in/khachik-karapetyan/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://www.instagram.com/khach.77/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          </ul>
+        </div>
       </div>
     </section>
   </main>

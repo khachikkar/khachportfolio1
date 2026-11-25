@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Work Editor — Khachik Karapetyan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <style>
+    .admin-page { min-height: 100vh; padding: clamp(24px, 6vw, 88px); background: #f4f4f2; color: #111; }
+    .admin-wrap { width: min(100%, 980px); margin: 0 auto; }
+    .admin-top { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-bottom: 24px; border-bottom: 1px solid #c9c9c7; }
+    .admin-top h1 { margin: 0; font-size: clamp(28px, 4vw, 48px); line-height: 1.1; }
+    .admin-page h2 { margin: 0 0 16px; font-size: clamp(24px, 3vw, 34px); line-height: 1.15; letter-spacing: -.03em; }
+    .admin-top a, .admin-button { color: inherit; }
+    .admin-panel { padding: 28px 0; }
+    .admin-panel[hidden] { display: none; }
+    .admin-form { display: grid; gap: 16px; max-width: 680px; }
+    .admin-form label { display: grid; gap: 7px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; }
+    .admin-form input, .admin-form textarea { width: 100%; padding: 13px 14px; border: 1px solid #aaa; border-radius: 0; background: white; color: #111; font: 16px/1.4 Montserrat, sans-serif; text-transform: none; letter-spacing: normal; }
+    .admin-form textarea { min-height: 90px; resize: vertical; }
+    .admin-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .admin-button { min-height: 46px; padding: 12px 18px; border: 1px solid #111; background: #111; color: #fff; font: 600 13px Montserrat, sans-serif; letter-spacing: .06em; text-transform: uppercase; cursor: pointer; }
+    .admin-button.secondary { background: transparent; color: #111; }
+    .admin-button.danger { border-color: #8c2334; background: #8c2334; }
+    .admin-button:disabled { opacity: .55; cursor: wait; }
+    .admin-status { min-height: 1.5em; margin: 16px 0; color: #243f67; }
+    .admin-list { margin: 24px 0 40px; padding: 0; list-style: none; border-top: 1px solid #c9c9c7; }
+    .admin-item { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 16px 0; border-bottom: 1px solid #c9c9c7; }
+    .admin-item strong, .admin-item small { display: block; }
+    .admin-item small { margin-top: 4px; color: #666; }
+    .admin-item-actions { display: flex; gap: 8px; }
+    .admin-item-actions .admin-button { min-height: 38px; padding: 8px 12px; }
+    .admin-note { max-width: 720px; color: #555; font-size: 14px; line-height: 1.6; }
+    .admin-steps { margin: 24px 0; padding-left: 22px; color: #333; line-height: 1.8; }
+    @media (max-width: 600px) { .admin-item { align-items: flex-start; flex-direction: column; } }
+  </style>
+</head>
+<body class="admin-page">
+  <main class="admin-wrap">
+    <header class="admin-top">
+      <h1>Work editor</h1>
+      <a href="index.html#work">View portfolio ↗</a>
+    </header>
+    <p class="admin-status" id="admin-status" role="status" aria-live="polite"></p>
+    <section class="admin-panel" aria-labelledby="hero-editor-title">
+      <h2 id="hero-editor-title">Homepage hero image</h2>
+      <p class="admin-note">This is the large portrait at the top of your homepage.</p>
+      <img id="hero-image-preview" alt="Current homepage hero image preview" style="display:block;width:min(100%,560px);max-height:260px;margin:16px 0;object-fit:cover;object-position:center 39%;background:#e5e5e3">
+      <div class="admin-form">
+        <label>Choose a new hero image<input id="hero-image-file" type="file" accept="image/avif,image/jpeg,image/png,image/webp,.avif,.jpg,.jpeg,.png,.webp"></label>
+        <label>Image description<input id="hero-image-alt" maxlength="240"></label>
+      </div>
+    </section>
+    <section class="admin-panel" aria-labelledby="projects-title">
+      <h2 id="projects-title">Your projects</h2>
+      <ol class="admin-steps">
+        <li>Choose a project below to edit, or add a new one.</li>
+        <li>Upload or change its image from your computer.</li>
+        <li>Click <strong>Download updated portfolio JSON</strong>.</li>
+        <li>Replace <code>projects.json</code> in your portfolio folder with that file, then publish the site.</li>
+      </ol>
+      <p class="admin-note">The project list and hero image settings load automatically. Uploaded images are included in the downloaded JSON file. Compressed AVIF images are best for keeping the website fast.</p>
+      <ul class="admin-list" id="project-list"></ul>
+      <h2 id="form-title">Add a project</h2>
+      <form class="admin-form" id="project-form">
+        <input id="editing-slug" type="hidden">
+        <label>Project title<input id="project-title" required maxlength="120"></label>
+        <label>URL slug<input id="project-slug" required pattern="[a-z0-9]+(?:-[a-z0-9]+)*" maxlength="80" placeholder="my-project"></label>
+        <label>Category / number<input id="project-category" required maxlength="80" placeholder="01 / Branding"></label>
+        <label>Short description<textarea id="project-description" required maxlength="500"></textarea></label>
+        <label>Upload image<input id="project-image-file" type="file" accept="image/avif,image/jpeg,image/png,image/webp,.avif,.jpg,.jpeg,.png,.webp"></label>
+        <p class="admin-note">Choose an AVIF, JPG, PNG, or WebP image. When editing, leave this empty to keep the current image.</p>
+        <img id="project-image-preview" alt="Selected project image preview" hidden style="width:min(100%,420px);max-height:240px;object-fit:contain;object-position:left;background:#e5e5e3">
+        <label>Image description<input id="project-alt" maxlength="240"></label>
+        <label>Project focus (one item per line)<textarea id="project-focus" placeholder="Art direction&#10;Typography&#10;Applications"></textarea></label>
+        <div class="admin-actions">
+          <button class="admin-button" type="submit">Add project</button>
+          <button class="admin-button secondary" id="cancel-edit" type="button" hidden>Cancel</button>
+        </div>
+      </form>
+      <div class="admin-actions" style="margin-top:32px">
+        <button class="admin-button" id="save-json" type="button">Download updated portfolio JSON</button>
+      </div>
+    </section>
+  </main>
+  <script src="projects-fallback.js" defer></script>
+  <script src="admin.js" defer></script>
+</body>
+</html>

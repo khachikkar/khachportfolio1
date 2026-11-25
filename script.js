@@ -69,6 +69,65 @@ syncLayout();
 syncCurrentLink();
 syncHeaderAppearance();
 
+const projectGrid = document.querySelector('#project-grid');
+if (projectGrid) {
+  fetch('projects.json')
+    .then((response) => {
+      if (!response.ok) throw new Error('Could not load projects.');
+      return response.json();
+    })
+    .catch(() => ({
+      hero: window.PORTFOLIO_HERO_FALLBACK,
+      projects: window.PORTFOLIO_PROJECTS_FALLBACK
+    }))
+    .then((portfolio) => {
+      const projects = Array.isArray(portfolio) ? portfolio : portfolio.projects;
+      const hero = Array.isArray(portfolio) ? window.PORTFOLIO_HERO_FALLBACK : portfolio.hero;
+      if (!Array.isArray(projects)) throw new Error('Project data is missing.');
+      const heroImage = document.querySelector('#hero-image');
+      if (heroImage && hero?.image) {
+        heroImage.src = hero.image;
+        heroImage.alt = hero.alt || '';
+      }
+      const cards = projects.map((project, index) => {
+        const article = document.createElement('article');
+        const link = document.createElement('a');
+        link.className = 'project-card';
+        link.href = `project.html?slug=${encodeURIComponent(project.slug)}`;
+
+        const image = document.createElement('img');
+        image.src = project.image;
+        image.alt = project.alt || '';
+        image.loading = 'lazy';
+
+        const category = document.createElement('p');
+        category.className = 'meta';
+        category.textContent = project.category || `${String(index + 1).padStart(2, '0')} / Project`;
+
+        const title = document.createElement('h3');
+        title.textContent = project.title;
+
+        const description = document.createElement('p');
+        description.textContent = project.description;
+
+        link.append(image, category, title, description);
+        article.append(link);
+        return article;
+      });
+      projectGrid.replaceChildren(...cards);
+      if (document.documentElement.classList.contains('has-motion')) {
+        cards.forEach((card, index) => {
+          card.classList.add('reveal-item');
+          card.style.setProperty('--reveal-delay', `${Math.min(index, 5) * 85}ms`);
+          window.requestAnimationFrame(() => card.classList.add('is-visible'));
+        });
+      }
+    })
+    .catch(() => {
+      projectGrid.textContent = 'Projects are temporarily unavailable.';
+    });
+}
+
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 if (!reducedMotion.matches && 'IntersectionObserver' in window) {

@@ -90,7 +90,7 @@ h1, h2, h3, dt, strong, b { font-weight: 900; }
 
 .light { background: var(--paper); color: var(--ink); --line: #0003; }
 .hero-photo { position: relative; height: min(48svh, 56.25vw); background: var(--paper); }
-.hero-photo img { height: 100%; object-fit: cover; object-position: center 39%; filter: grayscale(1); }
+.hero-photo img { height: 100%; object-fit: cover; object-position: center 39%; filter: none; }
 .hero-photo figcaption {
   position: absolute;
   bottom: .7rem;
@@ -192,11 +192,14 @@ em { font-style: normal; color: var(--paper); }
 .service-list > li > .meta {
   align-self: center;
   color: transparent;
+  font-family: "Inter", sans-serif;
   font-size: clamp(5rem, 9vw, 16rem);
-  letter-spacing: -.045em;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.06em;
   line-height: .82;
   transition: color .35s ease, transform .45s cubic-bezier(.2,.7,.2,1);
-  -webkit-text-stroke: 1px var(--paper);
+  -webkit-text-stroke: 1.2px var(--paper);
 }
 .service-list > li:hover > .meta {
   color: var(--navy);
@@ -251,6 +254,10 @@ em { font-style: normal; color: var(--paper); }
   line-height: 1;
   text-transform: uppercase;
 }
+.experience-link { color: var(--ink); transition: color .25s ease; }
+.emater-link:hover, .emater-link:focus-visible,
+.wirestock-link:hover, .wirestock-link:focus-visible { color: var(--navy); }
+.picsart-link:hover, .picsart-link:focus-visible { color: #d41472; }
 .experience dd {
   color: var(--navy);
   font-size: clamp(.7rem, .78vw, 1.15rem);

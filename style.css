@@ -53,7 +53,7 @@ h1, h2, h3, dt, strong, b { font-weight: 900; }
 }
 .site-header.is-scrolled { background-color: transparent; border-color: transparent; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .site-header.is-over-light { color: var(--ink); }
-.wordmark img { filter: brightness(0) invert(1); }
+.wordmark img { width: 240px; max-width: 100%; filter: brightness(0) invert(1); }
 .site-header.is-over-light .wordmark img { filter: none; }
 .site-header nav { display: flex; gap: clamp(.75rem, 2.2vw, 2.25rem); }
 .site-header nav a { position: relative; padding-block: .25rem; }
@@ -297,6 +297,7 @@ em { font-style: normal; color: var(--paper); }
 @media (max-width: 700px) {
   :root { --panel-overlap: clamp(2rem, 6vh, 3rem); }
   .site-header { flex-wrap: wrap; }
+  .wordmark img { width: 200px; }
   .site-header nav { flex-wrap: wrap; }
   .site-header .menu-toggle:not([hidden]) + nav { width: 100%; justify-content: space-between; padding-block: .35rem; }
   .hero-details { font-size: .63rem; }

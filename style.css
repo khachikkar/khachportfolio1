@@ -152,7 +152,7 @@ em { font-style: normal; color: var(--paper); }
 .project-grid article { overflow: hidden; }
 .project-card { display: block; color: inherit; }
 .project-card:hover { text-decoration: none; }
-.project-grid img { aspect-ratio: 3 / 2; object-fit: cover; filter: grayscale(1); transition: transform .8s cubic-bezier(.2,.7,.2,1), filter .5s ease; }
+.project-grid img { aspect-ratio: 3 / 2; object-fit: cover; object-position: center top; filter: grayscale(1); transition: transform .8s cubic-bezier(.2,.7,.2,1), filter .5s ease; }
 .project-grid article:hover img { transform: scale(1.025); filter: grayscale(.4); }
 .project-grid .meta { margin: 1rem 0 .6rem; color: var(--paper); opacity: .72; }
 .project-grid h3 + p { margin-top: .65rem; line-height: 1.5; }
@@ -163,7 +163,7 @@ em { font-style: normal; color: var(--paper); }
 .project-hero h1 { max-width: 12ch; margin-bottom: 1.5rem; font-size: clamp(3.4rem, 10vw, 11rem); line-height: .95; letter-spacing: -.065em; }
 .project-lede { max-width: 48ch; font-size: clamp(1.2rem, 2.1vw, 2.25rem); line-height: 1.45; }
 .project-feature { position: relative; margin-top: clamp(2.5rem, 6vw, 6rem); }
-.project-feature img { max-height: 72svh; aspect-ratio: 1.85 / 1; object-fit: cover; filter: grayscale(1); }
+.project-feature img { width: 100%; height: auto; max-height: none; aspect-ratio: auto; object-fit: contain; filter: none; }
 .project-feature figcaption { position: absolute; right: 1rem; bottom: 1rem; padding: .55rem .75rem; background: var(--ink); color: var(--paper); }
 .project-overview { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; }
 .overview-content { max-width: 64rem; }
@@ -306,7 +306,6 @@ em { font-style: normal; color: var(--paper); }
   .intro, .project-grid, .about, .contact-info { grid-template-columns: 1fr; }
   .project-overview { grid-template-columns: 1fr; gap: 2rem; }
   .project-hero h1 { font-size: clamp(3rem, 14vw, 6rem); }
-  .project-feature img { aspect-ratio: 1.2 / 1; }
   .about { min-height: 0; padding-block: 4rem; gap: 2.5rem; }
   .about h2 { font-size: clamp(4rem, 16vw, 7rem); }
   .about .body-copy { font-size: 1.15rem; }
